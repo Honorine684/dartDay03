@@ -2,14 +2,22 @@ import 'dart:io';
 
 class Amulette{
   String? nom;
-  int? puissance;
+  int puissance;
   String? materiau;
   String? effet = null;
+  bool estMaudite = false;
   Amulette(this.nom,this.puissance,this.materiau);
+ /* Amulette(String? nom,int puissance,String? materiau,String? effet){
+    this.nom = nom;
+    this.puissance = puissance;
+    this.materiau = materiau;
+    this.effet = effet;
+  }*/
   
   void enchanter(String? effetMagique){
     effet = effetMagique;
   }
+
   bool estEnchanter(){
     if(effet == null){
       return false;
@@ -17,7 +25,34 @@ class Amulette{
       return true;
     }
   }
-}
+  static fusionnerNom(Amulette amulette1, Amulette amulette2){
+      return "${amulette1.nom}&&${amulette2.nom}";
+  }
+  static fusionnerPuissance(Amulette amulette1, Amulette amulette2){
+    return amulette1.puissance + amulette2.puissance;
+  }
+  static fusionnerMateriau(Amulette amulette1, Amulette amulette2){
+    return "${amulette1.materiau}&&${amulette2.materiau}";
+  }
+  static fusionnerEffet(Amulette amulette1, Amulette amulette2){
+    return "${amulette1.effet}&&${amulette2.effet}";
+  }
+  static fusionnerAmulette(Amulette amulette1, Amulette amulette2){
+    String? nomFusion = fusionnerNom(amulette1,amulette2) ;
+    int puissanceFuison = fusionnerPuissance(amulette1, amulette2);
+    String? materiauFusion = fusionnerMateriau(amulette1, amulette2);
+   String? effetFuision = fusionnerEffet(amulette1, amulette2);
+
+    Amulette amuletteFusion = Amulette(nomFusion, puissanceFuison, materiauFusion);
+    amuletteFusion.effet =effetFuision;
+    print("Amulette(Nom: ${amuletteFusion.nom},Puissance: ${amuletteFusion.puissance},Matériau: ${amuletteFusion.materiau},Effet: ${amuletteFusion.effet})");
+  }
+  /*bool maudire(){
+    return 
+  }*/
+
+  }
+
 
 void trouverAmulette(String? nomRecherche,List<Amulette> amulettes){
   if(nomRecherche == null){
@@ -70,6 +105,11 @@ void main(){
 
   // test de methode estenchanter
   print(amuletteFeu.estEnchanter());
+
+  // test de la fusion des amulettes
+ Amulette.fusionnerAmulette(amuletteFeu,amuletteGlace);
+
+  
 }
 
 
