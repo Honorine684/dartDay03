@@ -47,11 +47,23 @@ class Amulette{
     amuletteFusion.effet =effetFuision;
     print("Amulette(Nom: ${amuletteFusion.nom},Puissance: ${amuletteFusion.puissance},Matériau: ${amuletteFusion.materiau},Effet: ${amuletteFusion.effet})");
   }
-  /*bool maudire(){
-    return 
-  }*/
-
+  bool maudire(){
+    return estMaudite = true;
   }
+  void estSure(){
+    if(!maudire()){
+      estMaudite = false;
+      print("Votre amulette est sure");
+    }else{
+      estMaudite = true;
+      print("Votre amulette n'est pas sure");
+    } 
+  }
+
+static purifier(Amulette amulette){
+  return amulette.estMaudite = false;
+}
+}
 
 
 void trouverAmulette(String? nomRecherche,List<Amulette> amulettes){
@@ -109,7 +121,15 @@ void main(){
   // test de la fusion des amulettes
  Amulette.fusionnerAmulette(amuletteFeu,amuletteGlace);
 
-  
+  // application de la malediction a voile nocturne
+ print(amuletteOmbre.maudire());
+ print("Amulette Ombre(Nom: ${amuletteOmbre.nom},Puissance: ${amuletteOmbre.puissance},Matériau: ${amuletteOmbre.materiau},Effet: ${amuletteOmbre.effet},Malediction: ${amuletteOmbre.estMaudite})");
+ // verifions si voile nocture est sure
+ amuletteOmbre.estSure(); 
+ // test de la methode static purifier
+Amulette.purifier(amuletteOmbre);
+print("Amulette Ombre(Nom: ${amuletteOmbre.nom},Puissance: ${amuletteOmbre.puissance},Matériau: ${amuletteOmbre.materiau},Effet: ${amuletteOmbre.effet},Malediction: ${amuletteOmbre.estMaudite})");
+
 }
 
 
