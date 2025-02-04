@@ -1,21 +1,33 @@
+import 'dart:math';
+
 import 'Amulette.dart';
 
 class ForgeMagique {
-  List<Amulette> _amuletteRares =[];
+  List<Amulette> amuletteRares =[];
+  final Random _random = Random();
 
   void creerAmuletteRare(String nom,int puissance,String materiau,String effet){
-    Amulette amulette = Amulette.avecEffet(nom, puissance, materiau,effet);
-    amulette.effet = effet;
-    _amuletteRares.add(amulette);
+     bool estBenie;
+    if (_random.nextDouble() < 0.3) {
+      estBenie = true;
+    } else {
+      estBenie = false;
+    }
+    Amulette amulette = Amulette.avecStatus(nom, puissance, materiau,effet,estBenie);
+
+    amuletteRares.add(amulette);
   }
 
   void afficherAmuletteForge(){
     print("Voila les amulettes de la forge magique");
     print("=======================================");
-    for(Amulette amulette in _amuletteRares){
-    print("Amulette(Nom: ${amulette.nom},Puissance: ${amulette.puissance},Matériau: ${amulette.materiau},Effet: ${amulette.effet})");
+    for(Amulette amulette in amuletteRares){
+     print( amulette.toString());
+    //print("Amulette(Nom: ${amulette.nom},Puissance: ${amulette.puissance},Matériau: ${amulette.materiau},Effet: ${amulette.effet})");
     }
   }
+
+
 }
 
 void main(){
